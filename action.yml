@@ -45,9 +45,8 @@ inputs:
     description: 'Directory to collect sentry release information from. Useful when collecting information from a non-standard checkout directory.'
     required: false
 runs:
-  using: 'docker'
-  # If you change this, update the use-local-dockerfile action
-  image: 'docker://ghcr.io/getsentry/action-release-image:latest'
+  using: 'node16'
+  main: 'lib/main.js'
 branding:
   icon: 'triangle'
   color: 'purple'
