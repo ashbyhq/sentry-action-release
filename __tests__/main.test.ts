@@ -10,6 +10,7 @@ import {
   getSetCommitsOption,
   getProjects,
   getUrlPrefixOption,
+  getExtOption,
 } from '../src/options';
 
 describe('options', () => {
@@ -207,6 +208,26 @@ describe('options', () => {
     it('get url prefix', () => {
       process.env['INPUT_URL_PREFIX'] = 'build';
       expect(getUrlPrefixOption()).toEqual('build');
+    });
+  });
+
+  describe('getExtOption', () => {
+    afterEach(() => {
+      delete process.env['INPUT_EXT'];
+    });
+
+    test('should return undefined when ext is omitted', () => {
+      expect(getExtOption()).toBeUndefined();
+    });
+
+    test('should return array when ext is provided', () => {
+      process.env['INPUT_EXT'] = 'js map';
+      expect(getExtOption()).toEqual(['js', 'map']);
+    });
+
+    test('should filter out empty strings', () => {
+      process.env['INPUT_EXT'] = 'js  map';
+      expect(getExtOption()).toEqual(['js', 'map']);
     });
   });
 });

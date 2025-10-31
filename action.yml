@@ -41,6 +41,13 @@ inputs:
   strip_common_prefix:
     description: 'Will remove a common prefix from uploaded filenames. Useful for removing a path that is build-machine-specific.'
     required: false
+  rewrite:
+    description: 'Enables rewriting of matching sourcemaps so that indexed maps are flattened and missing sources are inlined if possible. Defaults to true.'
+    required: false
+    default: true
+  ext:
+    description: 'Space-separated list of file extensions to be considered for source map upload. By default: js, map, jsbundle, bundle.'
+    required: false
   working_directory:
     description: 'Directory to collect sentry release information from. Useful when collecting information from a non-standard checkout directory.'
     required: false
