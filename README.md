@@ -75,6 +75,8 @@ Adding the following to your workflow will create a new Sentry release and tell 
 |`projects`|Space-separated list of paths of projects. When omitted, falls back to the environment variable `SENTRY_PROJECT` to determine the project.|-|
 |`url_prefix`|Adds a prefix to source map urls after stripping them.|-|
 |`strip_common_prefix`|Will remove a common prefix from uploaded filenames. Useful for removing a path that is build-machine-specific.|`false`|
+|`rewrite`|Enables rewriting of matching sourcemaps so that indexed maps are flattened and missing sources are inlined if possible.|`true`|
+|`ext`|Space-separated list of file extensions to be considered for source map upload. By default: js, map, jsbundle, bundle.|-|
 |`working_directory`|Directory to collect sentry release information from. Useful when collecting information from a non-standard checkout directory.|-|
 
 ### Examples
@@ -86,6 +88,18 @@ Adding the following to your workflow will create a new Sentry release and tell 
       with:
         environment: 'production'
         sourcemaps: './lib'
+    ```
+
+- Upload source maps with custom file extensions and disable rewriting.
+
+    ```yaml
+    - uses: getsentry/action-release@v1
+      with:
+        environment: 'production'
+        sourcemaps: './build'
+        url_prefix: '~/'
+        rewrite: false
+        ext: 'js map'
     ```
 
 - Create a new Sentry release for the `production` environment of your project at version `v1.0.1`.
