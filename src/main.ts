@@ -24,6 +24,8 @@ import * as process from 'process';
       'strip_common_prefix',
       false
     );
+    const rewrite = options.getBooleanOption('rewrite', true);
+    const ext = options.getExtOption();
     const version = await options.getVersion();
     const workingDirectory = options.getWorkingDirectory();
 
@@ -56,6 +58,8 @@ import * as process from 'process';
             dist,
             urlPrefix,
             stripCommonPrefix,
+            rewrite,
+            ext,
           };
           return cli.uploadSourceMaps(version, sourceMapOptions);
         })

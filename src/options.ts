@@ -182,3 +182,12 @@ export const getUrlPrefixOption = (): string => {
 export const getWorkingDirectory = (): string => {
   return core.getInput('working_directory');
 };
+
+export const getExtOption = (): string[] | undefined => {
+  const extOption: string = core.getInput('ext');
+  if (!extOption) {
+    return undefined;
+  }
+
+  return extOption.split(' ').filter(ext => ext.length > 0);
+};
